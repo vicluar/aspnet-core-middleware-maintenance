@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MaintenancePage.Configurations;
 using MaintenancePage.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,11 @@ namespace MaintenancePage
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddMaintenance(() => false, Encoding.UTF8.GetBytes("<div>Doing some Maintenance</div>"));
+
+            var appSettings = Configuration.Get<AppSettings>();
+
+            services.AddMaintenance(() => appSettings.MaintenancePage.MaintenancePageEnabled, 
+                Encoding.UTF8.GetBytes("<div>Doing some Maintenance</div>"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
