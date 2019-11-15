@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using MaintenancePage.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +26,7 @@ namespace MaintenancePage
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddMaintenance(() => false, Encoding.UTF8.GetBytes("<div>Doing some Maintenance</div>"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +44,8 @@ namespace MaintenancePage
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseMaintenance();
 
             app.UseRouting();
 
