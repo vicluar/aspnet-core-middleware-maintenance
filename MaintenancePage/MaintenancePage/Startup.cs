@@ -30,8 +30,7 @@ namespace MaintenancePage
 
             var appSettings = Configuration.Get<AppSettings>();
 
-            services.AddMaintenance(() => appSettings.MaintenancePage.MaintenancePageEnabled, 
-                Encoding.UTF8.GetBytes("<div>Doing some Maintenance</div>"));
+            services.AddMaintenance(() => appSettings.MaintenancePage.MaintenancePageEnabled, "/Home/Maintenance");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,16 +8,15 @@ namespace MaintenancePage.Infrastructure
     public class MaintenancePage
     {
         private readonly Func<bool> _enabledFunc;
-        private readonly byte[] _response;
 
-        public MaintenancePage(Func<bool> enabledFunc, byte[] response)
+        public MaintenancePage(Func<bool> enabledFunc, string response)
         {
             _enabledFunc = enabledFunc;
-            _response = response;
+            MaintenanceHandlerPath = response;
         }
 
         public bool Enabled => _enabledFunc();
-        public byte[] Response => _response;
+        public string MaintenanceHandlerPath { get; }
 
         public int RetryAfterInSeconds { get; set; } = 3600;
         public string ContentType { get; set; } = "text/html";

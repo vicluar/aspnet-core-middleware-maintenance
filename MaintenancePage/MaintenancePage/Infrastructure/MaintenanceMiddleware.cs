@@ -31,9 +31,8 @@ namespace MaintenancePage.Infrastructure
                 context.Response.StatusCode = (int)HttpStatusCode.ServiceUnavailable;
                 context.Response.Headers.Add("Retry-After", _maintenancePage.RetryAfterInSeconds.ToString());
                 context.Response.ContentType = _maintenancePage.ContentType;
-                await context
-                    .Response
-                    .WriteAsync(Encoding.UTF8.GetString(_maintenancePage.Response), Encoding.UTF8);
+
+                context.Request.Path = _maintenancePage.MaintenanceHandlerPath;
             }
             await _next.Invoke(context);
         }

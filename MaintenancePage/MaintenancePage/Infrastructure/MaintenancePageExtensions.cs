@@ -17,10 +17,10 @@ namespace MaintenancePage.Infrastructure
         }
 
         public static IServiceCollection AddMaintenance(this IServiceCollection services, 
-            Func<bool> enabler, byte[] response, string contentType = "text/html", 
+            Func<bool> enabler, string handlerPath, string contentType = "text/html", 
             int retryAfterInSeconds = 3600)
         {
-            AddMaintenance(services, new MaintenancePage(enabler, response)
+            AddMaintenance(services, new MaintenancePage(enabler, handlerPath)
             {
                 ContentType = contentType,
                 RetryAfterInSeconds = retryAfterInSeconds
